@@ -1,0 +1,24 @@
+<html>
+{% load static %}
+  <head>
+      <title>App enquetes</title>
+      <link rel="stylesheet" href="{% static 'mysite/css/style.css' %}">
+      <link rel="fav icon" type="png" href="{% static 'icon.png' %}"/>
+  </head>
+  <body>
+      <h1>Vinícius Forms</h1>
+      <h2>Listagem de perguntas encerradas</h2>
+        {% if lista_perguntas %}
+            {% for pergunta in lista_perguntas%}
+                <p><a class="botao01" href="{%url 'enquete:detalhes' pergunta.id%}/">
+                    {{pergunta.enunciado}}
+                    </a>
+                </p>
+            {% endfor %}
+        {% else %}
+        <h3>tem nenhuma enquete encerrada ainda não</h3>
+        {% endif %}
+        <hr/>
+        <a class="botao01" href= "{% url 'enquete:index' %}">Voltar</a>
+  </body>
+</html>

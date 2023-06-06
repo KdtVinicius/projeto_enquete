@@ -1,0 +1,27 @@
+<html>
+    {% load static %}
+    <head>
+        <title>Vinícius Forms</title>
+        <link rel="stylesheet" href="{% static 'mysite/css/style.css' %}">
+        <link rel="fav icon" type="png" href="{% static 'icon.png' %}"/>
+    </head>
+    <body>
+        <h1>Aplicação de Enquetes</h1>
+        <h2>Detalhes da Enquete #{{ pergunta.id }}</h2>
+        <h3>{{ pergunta.enunciado }}</h3>
+        {% if error %}
+            <p><strong>{{ error }}</strong></p>
+        {% endif %}
+        <form action="{% url 'enquete:votos' pergunta.id %}" method="post">
+        {% csrf_token %}
+        {% for choice in pergunta.alternativa_set.all %}
+            <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+            <label for="choice{{ forloop.counter }}">{{ choice.texto }}</label><br/>
+        {% endfor %}
+        <br/>
+        <input type="submit" value="Votar">
+        </form>
+        <hr/>
+        <a class="botao01" href="{% url 'enquete:index' %}">voltar</a>
+    </body>
+</html>
