@@ -9,6 +9,14 @@ def criar_pergunta(texto, dias):
         data = timezone.now() + datetime.timedelta(days = dias)
         return Pergunta.objects.create(enunciado=texto, data_pub = data)
 
+class DetalhesViewTeste(TestCase):
+    def test_com_perguta_no_futuro(self):
+        """ao tentar exibir os detalhes de pergunta no futuro recebemos 404"""
+        pergunta = criar_pergunta('pergunta futura', 5)
+        url =  reverse('enquete:detalhes', args=(pergunta.id,))
+        resposta = self.client.get(url)
+        self.assertEqual(resposta.status_code, 404)
+
 class PerguntaModelTest(TestCase):
     def test_publicada_recentemente_com_pergunta_no_futuro(self):
         "ao acionar esse teste ele ira verificar se a pergunta publicada é no futuro"

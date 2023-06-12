@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from . models import Pergunta, Alternativa
 from django.views import View
 from django.utils import timezone
@@ -21,9 +21,8 @@ class EncerradasView(View):
 class DetalhesView(View):
     def get(self, request, *args, **kwargs):
         pergunta = get_object_or_404(Pergunta, pk = kwargs['pk'])
-        return render(
-            request, 'enquete/pergunta_detail.html', {'pergunta': pergunta}
-        )
+        if pergunta.data_pub > timezone.now(): raise Http404('Nenhuma pergunta encontrada para essa especificação')
+        return render(request, 'enquetes/pergunta_detail.html', {'pergunta': pergunta})
 
 class ResultadoView(View):
     def get(self, request, *args, **kwargs):
