@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'enquete.apps.EnqueteConfig'
+    'enquete.apps.EnqueteConfig',
+    'principal.apps.PrincipalConfig',
+    'projeto_enquete_disciplina.apps.ProjetoEnqueteDisciplinaConfig',
 ]
 
 MIDDLEWARE = [
