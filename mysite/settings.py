@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'enquete.apps.EnqueteConfig',
     'principal.apps.PrincipalConfig',
-    'projeto_enquete_disciplina.apps.ProjetoEnqueteDisciplinaConfig',
+    'simuladao.apps.SimuladaoConfig',
 ]
 
 MIDDLEWARE = [

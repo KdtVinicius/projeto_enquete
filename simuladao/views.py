@@ -3,4 +3,4 @@ from django.views import View
 
 class IndexView(View):
     def get(self, request, *args, **kwargs):
-        return render(request, 'projeto_enquete_disciplina/index.html')
+        return render(request, 'simuladao/index.html')
