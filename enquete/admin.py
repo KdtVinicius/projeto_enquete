@@ -1,7 +1,19 @@
 from django.contrib import admin
 from .models import Pergunta, Alternativa
 
-# Register your models here.
+admin.site.site_header = 'Enquetes KdtVinicius 2023'
 
-admin.site.register(Pergunta)
-admin.site.register(Alternativa)
+class AlternativaInline(admin.TabularInline):
+    model = Alternativa
+    extra = 1
+
+class PerguntaAdmin(admin.ModelAdmin):
+    fieldsets = [
+        ('Adicione o enunciado da questão', {'fields':['enunciado']}),
+        ('adicione as informações das datas', {'fields':['data_pub']}),
+    ]
+    inlines = [AlternativaInline]
+    list_display= ('enunciado', 'id', 'data_pub', 'pubicada_recentemente')
+
+
+admin.site.register(Pergunta, PerguntaAdmin)

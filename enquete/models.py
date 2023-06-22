@@ -16,17 +16,22 @@ class Pergunta(models.Model):
         return total
     def alternativas_ordenadas(self):
         return self.alternativa_set.order_by('-votos_quant')
-    def was_published_recently(self):
+    def pubicada_recentemente(self):
         marco_48h = timezone.now() - datetime.timedelta(hours = 48)
         agora = timezone.now()
         return marco_48h <= self.data_pub <= agora
-        #return(self.data_pub <= agora) and (self.data_pub >= marco_48h)
+    pubicada_recentemente.admin_order_field = 'data_pub'
+    pubicada_recentemente.boolean = True
+    pubicada_recentemente.short_description = 'recente?'
 
 class Alternativa(models.Model):
     pergunta = models.ForeignKey(Pergunta, on_delete = models.CASCADE)
     texto = models.CharField(max_length = 100)
     votos_quant = models.IntegerField(default = 0)
+    #alternativa_correta = models.BooleanField(default =False)
     def __str__(self):
         return self.texto
     def porcentagem(self):
         return (self.votos_quant / self.pergunta.total_de_votos()) * 100
+    #def acertou(self):
+        #if self.alternativa_correta == True: return print("você acertou essa questão")

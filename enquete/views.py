@@ -7,10 +7,15 @@ from django.utils import timezone
 
 class IndexView(View):
     def get(self, request, *args, **kwargs):
-        lista_perguntas = Pergunta.objects.filter(data_fim__gte = timezone.now()).order_by('-data_pub')
-        #lista_perguntas = Pergunta.objects.filter(data_pub__lte = timezone.now()).order_by('-data_pub') isso aqui felipao mudou na aula de testes
-        context = {'lista_perguntas': lista_perguntas}
+        query = request.GET.get('qr', '')
+        if query:
+            lista_perguntas = Pergunta.objects.filter(enunciado__icontains=query)
+        else:
+            lista_perguntas = Pergunta.objects.filter(data_fim__gte = timezone.now()).order_by('-data_pub')
+        context = {'lista_perguntas': lista_perguntas, 'query': query}
         return render(request, 'enquete/index.html', context)
+        '''lista_perguntas = Pergunta.objects.filter(data_fim__gte = timezone.now()).order_by('-data_pub') antes de igor me mostrar o query
+        lista_perguntas = Pergunta.objects.filter(data_pub__lte = timezone.now()).order_by('-data_pub') isso aqui felipao mudou na aula de testes'''
 
 class EncerradasView(View):
     def get(self, request, *args, **kwargs):
@@ -21,8 +26,12 @@ class EncerradasView(View):
 class DetalhesView(View):
     def get(self, request, *args, **kwargs):
         pergunta = get_object_or_404(Pergunta, pk = kwargs['pk'])
-        if pergunta.data_pub > timezone.now(): raise Http404('Nenhuma pergunta encontrada para essa especificação')
-        return render(request, 'enquetes/pergunta_detail.html', {'pergunta': pergunta})
+        if pergunta.data_pub > timezone.now():
+            raise Http404('Nenhuma pergunta encontrada para essa especificação')
+        return render(
+            request, 'enquete/pergunta_detail.html', {'pergunta': pergunta}
+        )
+
 
 class ResultadoView(View):
     def get(self, request, *args, **kwargs):

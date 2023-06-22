@@ -18,6 +18,10 @@
         {% else %}
         <h3>tem nenhuma enquete ainda não</h3>
         {% endif %}
+        <form method="GET" action="{% url 'enquete:index' %}">
+            <input type="text" name="qr" value="{{query}}" placeholder="Procurar uma questão">
+            <button type="submit">Buscar</button>
+        </form>
         <a class="botao01" href= "{% url 'enquete:encerradas' %}">Ver perguntas encerradas</a>
   </body>
 </html>
