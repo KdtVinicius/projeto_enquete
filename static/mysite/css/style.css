@@ -23,7 +23,7 @@ h1, h2{
      border-radius: 3px;
      box-shadow: 0 3px 0 rgba(0, 0, 0, .3), 0 2px 7px rgba(0, 0, 0, 0.2);
      color: #616165;
-     display: block;
+     display: flex;
      font-family: "Trebuchet MS";
      font-size: 14px;
      font-weight: bold;
@@ -32,8 +32,49 @@ h1, h2{
      text-decoration: none;
      text-transform: uppercase;
      text-shadow:1px 1px 0 #FFF;
+     text-align: center;
      padding: 5px 15px;
-     position: relative;
-     width: 80px;
-     margin-left: 47vw;
+     width: 175px;
+     margin: auto;
+     margin-bottom: 1vw;
+     justify-content: center;
+}
+
+.botao01:hover{
+     background: -webkit-linear-gradient(left, #ffffff, #eccbcb);
+     background: -moz-linear-gradient(left, #ffffff, #eccbcb);
+     background: -ms-linear-gradient(left, #ffffff, #eccbcb);
+     background: -o-linear-gradient(left, #ffffff, #eccbcb);
+     background: linear-gradient(to right, #ffffff, #eccbcb);
+     border: 1px solid #CCCCCE;
+     border-radius: 3px;
+     box-shadow: 0 3px 0 rgba(0, 0, 0, .3), 0 2px 7px rgba(0, 0, 0, 0.2);
+     color: #616165;
+     display: flex;
+     font-family: "Trebuchet MS";
+     font-size: 14px;
+     font-weight: bold;
+     line-height: 25px;
+     text-align: center;
+     text-decoration: none;
+     text-transform: uppercase;
+     text-shadow:1px 1px 0 #FFF;
+     text-align: center;
+     padding: 10px 30px;
+     width: 175px;
+     margin: auto;
+     margin-bottom: 1vw;
+     justify-content: center;
+}
+
+form{
+    margin-top: 2vw;
+}
+
+#encerradas:hover{
+    background: -webkit-linear-gradient(left, #8bbae8, #e4ff8f);
+    background: -moz-linear-gradient(left, #8bbae8, #e4ff8f);
+    background: -ms-linear-gradient(left, #8bbae8, #e4ff8f);
+    background: -o-linear-gradient(left, #8bbae8, #e4ff8f);
+    background: linear-gradient(to right, #8bbae8, #e4ff8f);
 }

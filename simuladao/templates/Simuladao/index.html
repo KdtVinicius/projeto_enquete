@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Página Inicial da aplicação</title>
+</head>
+<body>
+    <h1>Bem-vindo à Página Inicial</h1>
+
+    {% if user.is_authenticated %}
+        <p>Você está logado como: {{ user.username }}</p>
+        <a href="{% url 'logout' %}">Logout</a>
+    {% else %}
+        <p>Você não está logado.</p>
+        <a href="{% url 'simuladao:login' %}">Fazer login</a>
+    {% endif %}
+
+    <p><a href="{% url 'simuladao:realizar' %}">Ver Lista de Simulados</a></p>
+</body>
+</html>

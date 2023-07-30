@@ -12,7 +12,7 @@
         {% if error %}
             <p><strong>{{ error }}</strong></p>
         {% endif %}
-        <form action="{% url 'enquete:votos' pergunta.id %}" method="post">
+        <div id='alternativas'><form action="{% url 'enquete:votos' pergunta.id %}" method="post">
         {% csrf_token %}
         {% for choice in pergunta.alternativa_set.all %}
             <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
@@ -21,6 +21,7 @@
         <br/>
         <input type="submit" value="Votar">
         </form>
+        </div>
         <hr/>
         <a class="botao01" href="{% url 'enquete:index' %}">voltar</a>
     </body>

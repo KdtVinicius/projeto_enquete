@@ -14,8 +14,8 @@ class IndexView(View):
             lista_perguntas = Pergunta.objects.filter(data_fim__gte = timezone.now()).order_by('-data_pub')
         context = {'lista_perguntas': lista_perguntas, 'query': query}
         return render(request, 'enquete/index.html', context)
-        '''lista_perguntas = Pergunta.objects.filter(data_fim__gte = timezone.now()).order_by('-data_pub') antes de igor me mostrar o query
-        lista_perguntas = Pergunta.objects.filter(data_pub__lte = timezone.now()).order_by('-data_pub') isso aqui felipao mudou na aula de testes'''
+        #lista_perguntas = Pergunta.objects.filter(data_fim__gte = timezone.now()).order_by('-data_pub') antes de igor me mostrar o query
+        #lista_perguntas = Pergunta.objects.filter(data_pub__lte = timezone.now()).order_by('-data_pub') isso aqui felipao mudou na aula de testes
 
 class EncerradasView(View):
     def get(self, request, *args, **kwargs):

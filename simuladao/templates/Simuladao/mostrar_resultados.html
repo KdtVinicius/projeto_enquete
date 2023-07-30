@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resultados do Simulado - {{ simulado.titulo }}</title>
+</head>
+<body>
+    <h1>Resultados - {{ simulado.titulo }}</h1>
+    <h3>Pontuação: {{ pontuacao }} / {{ total_questoes }}</h3>
+    <ul>
+        {% for questao in questoes %}
+            <li>
+                {% if str(questao.id) in respostas and respostas[str(questao.id)] == questao.resposta_correta %}
+                    <span style="color: green;">Questão {{ forloop.counter }} - Correta</span>
+                {% else %}
+                    <span style="color: red;">Questão {{ forloop.counter }} - Incorreta</span>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

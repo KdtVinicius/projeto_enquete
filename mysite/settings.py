@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'enquete.apps.EnqueteConfig',
     'principal.apps.PrincipalConfig',
     'simuladao.apps.SimuladaoConfig',
+    'perfil.apps.PerfilConfig',
 ]
 
 MIDDLEWARE = [
