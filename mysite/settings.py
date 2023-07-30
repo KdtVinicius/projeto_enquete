@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['KdtVinicius.pythonanywhere.com']
 
+LOGIN_REDIRECT_URL = 'simuladao:index'
+
 
 # Application definition
 
@@ -40,7 +42,6 @@ INSTALLED_APPS = [
     'enquete.apps.EnqueteConfig',
     'principal.apps.PrincipalConfig',
     'simuladao.apps.SimuladaoConfig',
-    'perfil.apps.PerfilConfig',
 ]
 
 MIDDLEWARE = [

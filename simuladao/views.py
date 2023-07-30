@@ -7,8 +7,8 @@ def index(request):
     return render(request, 'Simuladao/index.html')
 
 def lista_simulados(request):
-    simulado = Simulado.objects.all()
-    return render(request, 'Simuladao/listar_simulado.html', {'simulado': simulado})
+    simulados = Simulado.objects.all()
+    return render(request, 'Simuladao/listar_simulado.html', {'simulados': simulados})
 
 @login_required
 def realizar_simulado(request, simulado_id):

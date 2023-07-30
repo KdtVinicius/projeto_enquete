@@ -6,9 +6,9 @@
 <body>
     <h1>Simulados Disponíveis:</h1>
     <ul>
-        {% for simulado in simulados %}
-            <li><a href="{% url 'realizar_simulado' simulado_id=simulado.id %}">{{ simulado.nome_simulado }}</a></li>
-        {% endfor %}
+    {% for simulado in simulados %}
+            <li><a href="{% url 'simuladao:realizar_simulado' simulado_id=simulado.id %}">{{ simulado.nome_simulado }}</a></li>
+    {% endfor %}
     </ul>
 </body>
 </html>
