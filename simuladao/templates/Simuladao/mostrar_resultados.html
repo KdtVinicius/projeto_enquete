@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Resultados do Simulado - {{ simulado.titulo }}</title>
+    <title>Resultados do Simulado - {{ simulado.nome_simulado }}</title>
 </head>
 <body>
-    <h1>Resultados - {{ simulado.titulo }}</h1>
+    <h1>Resultados - {{ simulado.nome_simulado }}</h1>
     <h3>Pontuação: {{ pontuacao }} / {{ total_questoes }}</h3>
+    <h3>Porcentagem de Acertos: {{ porcentagem_acertos }}%</h3>
     <ul>
         {% for questao in questoes %}
             <li>

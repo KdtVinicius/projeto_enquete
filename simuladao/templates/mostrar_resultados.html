@@ -1,0 +1,42 @@
+{% load custom_tags %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resultados do Simulado - {{ simulado.nome_simulado }}</title>
+</head>
+<body>
+    <h1>Resultados - {{ simulado.nome_simulado }}</h1>
+    <h3>Pontuação Total: {{ pontuacao_total }}</h3>
+    <h3>Porcentagem de Acertos: {{ porcentagem_acertos }}%</h3>
+    <h2>Questões Respondidas:</h2>
+    <form method="post">
+        {% csrf_token %}
+        {% for questao in questoes %}
+            {% with questao_id_str=questao.id|stringformat:"s" %}
+                {% if form %}
+                    {% for field in form %}
+                        {% if field.name == f'pergunta_{questao.id}' %}
+                            <li>
+                                <p>{{ questao.enunciado }}</p>
+                                <ul>
+                                    {% for alternativa in questao.alternativa_set.all %}
+                                        {% if alternativa.id == field.value %}
+                                            {% if alternativa.alternativa_correta %}
+                                                <span style="color: green;">Correta</span>
+                                            {% else %}
+                                                <span style="color: red;">Incorreta</span>
+                                            {% endif %}
+                                            {{ alternativa.texto }}
+                                        {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        {% endfor %}
+        <input type="submit" value="Submeter Respostas">
+    </form>
+</body>
+</html>

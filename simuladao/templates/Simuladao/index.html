@@ -11,7 +11,8 @@
         <a href="{% url 'simuladao:logout' %}">Logout</a>
     {% else %}
         <p>Você não está logado.</p>
-        <a href="{% url 'simuladao:login' %}">Fazer login</a>
+        <a href="{% url 'simuladao:login' %}">Fazer login</a> </br>
+        <a href="{% url 'simuladao:register' %}">Fazer cadastro</a>
     {% endif %}
 
     <p><a href="{% url 'simuladao:lista_simulados' %}">Ver Lista de Simulados</a></p>

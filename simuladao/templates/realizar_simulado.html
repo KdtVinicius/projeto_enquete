@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Realizar Simulado - {{ simulado.titulo }}</title>
+    <title>Realizar Simulado - {{ simulado.nome_simulado }}</title>
 </head>
 <body>
-    <h1>{{ simulado.titulo }}</h1>
+    <h1>{{ simulado.nome_simulado }}</h1>
     <form method="post">
         {% csrf_token %}
-        {% for questao in questoes %}
+        <input type="hidden" name="simulado_id" value="{{ simulado.id }}">
+        {% for questao in simulado.pergunta.all %}
             <h3>Questão {{ forloop.counter }}:</h3>
             <p>{{ questao.enunciado }}</p>
             <ul>
-                {% for opcao in questao.opcoes.all %}
+                {% for opcao in questao.alternativa_set.all %}
                     <li>
                         <label>
                             <input type="radio" name="respostas[{{ questao.id }}]" value="{{ opcao.id }}"> {{ opcao.texto }}
