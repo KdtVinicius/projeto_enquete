@@ -1,7 +1,7 @@
 from django import forms
-from .models import Pergunta
+from .models import Alternativa
 
 class RespostaForm(forms.ModelForm):
     class Meta:
-        model = Pergunta
-        fields = ['resposta']
+        model = Alternativa
+        fields = ['texto']

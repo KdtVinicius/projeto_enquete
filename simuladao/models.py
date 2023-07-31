@@ -5,8 +5,7 @@ class Pergunta(models.Model):
     enunciado = models.CharField(max_length = 200)
     data_cadastro = models.DateTimeField('data de cadastro de questão')
     pontuacao = models.PositiveIntegerField(default = 0)
-    resposta = models.CharField(max_length = 50, null=True)
-    usuario = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE, null=True, default=None)
 
     def __str__(self):
         return self.enunciado
@@ -24,6 +23,7 @@ class Alternativa(models.Model):
     pergunta = models.ForeignKey(Pergunta, on_delete = models.CASCADE)
     texto = models.CharField(max_length = 100)
     votos_quant = models.IntegerField(default = 0)
+    alternativa_correta = models.BooleanField(default=False)
 
     def __str__(self):
         return self.texto
@@ -48,7 +48,7 @@ class Simulado(models.Model):
         return self.nome_simulado
 
 class Usuario(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, default=None)
 
     def __str__(self):
         return self.user.username
