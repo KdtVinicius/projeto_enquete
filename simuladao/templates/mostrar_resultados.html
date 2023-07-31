@@ -1,4 +1,3 @@
-{% load custom_tags %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,34 +8,25 @@
     <h3>Pontuação Total: {{ pontuacao_total }}</h3>
     <h3>Porcentagem de Acertos: {{ porcentagem_acertos }}%</h3>
     <h2>Questões Respondidas:</h2>
-    <form method="post">
-        {% csrf_token %}
+    <ul>
         {% for questao in questoes %}
-            {% with questao_id_str=questao.id|stringformat:"s" %}
-                {% if form %}
-                    {% for field in form %}
-                        {% if field.name == f'pergunta_{questao.id}' %}
-                            <li>
-                                <p>{{ questao.enunciado }}</p>
-                                <ul>
-                                    {% for alternativa in questao.alternativa_set.all %}
-                                        {% if alternativa.id == field.value %}
-                                            {% if alternativa.alternativa_correta %}
-                                                <span style="color: green;">Correta</span>
-                                            {% else %}
-                                                <span style="color: red;">Incorreta</span>
-                                            {% endif %}
-                                            {{ alternativa.texto }}
-                                        {% endif %}
-                                    {% endfor %}
-                                </ul>
-                            </li>
-                        {% endif %}
+            <li>
+                <p>{{ questao.enunciado }}</p>
+                <ul>
+                    {% for alternativa in questao.alternativa_set.all %}
+                        {% with resposta=alternativa.texto %}
+                            {% if resposta and resposta == questao.resposta_correta %}
+                                <li style="color: green;">{{ alternativa.texto }} (Correta)</li>
+                            {% elif resposta %}
+                                <li style="color: red;">{{ alternativa.texto }} (Incorreta)</li>
+                            {% else %}
+                                <li>{{ alternativa.texto }}</li>
+                            {% endif %}
+                        {% endwith %}
                     {% endfor %}
-                {% endif %}
-            {% endwith %}
+                </ul>
+            </li>
         {% endfor %}
-        <input type="submit" value="Submeter Respostas">
-    </form>
+    </ul>
 </body>
 </html>

@@ -4,16 +4,19 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
 class RespostaForm(forms.Form):
-    def __init__(self, perguntas, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
+        questoes = kwargs.pop('perguntas')  # Removendo 'perguntas' do kwargs
         super(RespostaForm, self).__init__(*args, **kwargs)
-        for pergunta in perguntas:
+        for pergunta in questoes:
             alternativas = pergunta.alternativa_set.all()
             self.fields[f'pergunta_{pergunta.id}'] = forms.ChoiceField(
                 choices=[(alternativa.id, alternativa.texto) for alternativa in alternativas],
                 widget=forms.RadioSelect,
                 label=pergunta.enunciado,
                 required=False,
+                initial=self.initial.get(f'pergunta_{pergunta.id}')  # Definindo as alternativas iniciais
             )
+
 
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
